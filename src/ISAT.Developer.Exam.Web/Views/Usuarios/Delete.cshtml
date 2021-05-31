@@ -1,0 +1,59 @@
+﻿@model ISAT.Developer.Exam.Web.Models.UsuarioViewModel
+@{
+    ViewData["Title"] = "Deletar Usuário";
+}
+<div class="card">
+    <div class="card-header card-header-primary">
+        <h4 class="card-title ">@ViewData["Title"]</h4>
+        <p class="card-category">
+            Tem certeza que deseja excluir este usuário?
+        </p>
+
+    </div>
+
+    <div class="card-body">
+        <form asp-action="Delete">
+
+            <dl class="row">
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Id)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Id)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Nome)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Nome)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Sobrenome)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Sobrenome)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Idade)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Idade)
+                </dd>
+            </dl>
+
+            <div class="form-group">
+                <input type="submit" value="Deletar" class="btn btn-danger" />
+            </div>
+
+            <div>
+                <a asp-action="Index">Voltar para lista</a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+criar migration
+
+dotnet ef migrations add CRIA_TABELA_USUARIO --project ISAT.Developer.Exam.Infrastructure --startup-project ISAT.Developer.Exam.Web --context ISAT.Developer.Exam.Infrastructure.ORM.Contexts.EFContextDB
+
+criar banco
+
+dotnet ef database update --project ISAT.Developer.Exam.Infrastructure --startup-project ISAT.Developer.Exam.Web --context ISAT.Developer.Exam.Infrastructure.ORM.Contexts.EFContextDB
