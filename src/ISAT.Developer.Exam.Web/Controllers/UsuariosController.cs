@@ -30,15 +30,12 @@ namespace ISAT.Developer.Exam.Web.Controllers
         {
             try
             {
-                var existeNomeCompleto = _usuarioService.GetAll().Where(e => e.Nome == usuarioViewModel.Nome 
-                && e.Sobrenome == usuarioViewModel.Sobrenome).ToList();
-                var existeEmail = _usuarioService.GetAll().Where(e => e.Email == usuarioViewModel.Email).ToList();
-                if (existeEmail.Count > 0)
+                if (_usuarioService.ExistePorEmail(UsuarioMapper.UsuarioMap(usuarioViewModel)))
                 {
                     ViewData["Mensagem"] = "Erro: Este e-mail já existe.";
-                } else if (existeNomeCompleto.Count > 0)
+                } else if (_usuarioService.ExistePorNomeCompleto(UsuarioMapper.UsuarioMap(usuarioViewModel)))
                 {
-                    ViewData["Mensagem"] = "Erro: Este nome e sobrenome já existe.";
+                    ViewData["Mensagem"] = "Erro: Este nome e sobrenome já existem.";
                 } else
                 {
                     _usuarioService.Insert(UsuarioMapper.UsuarioMap(usuarioViewModel));
@@ -76,12 +73,23 @@ namespace ISAT.Developer.Exam.Web.Controllers
 
         // POST: Usuarios/Edit/5
         [HttpPost]
-        public ActionResult Edit(long id, UsuarioViewModel usuarioViewModel)
+        public ActionResult Edit(UsuarioViewModel usuarioViewModel)
         {
             try
             {
-                _usuarioService.Update(UsuarioMapper.UsuarioMap(usuarioViewModel));
-                ViewData["Mensagem"] = "Sucesso: Usuário atualizado com sucesso.";
+                if (_usuarioService.ExistePorEmail(UsuarioMapper.UsuarioMap(usuarioViewModel)))
+                {
+                    ViewData["Mensagem"] = "Erro: Este e-mail já existe.";
+                }
+                else if (_usuarioService.ExistePorNomeCompleto(UsuarioMapper.UsuarioMap(usuarioViewModel)))
+                {
+                    ViewData["Mensagem"] = "Erro: Este nome e sobrenome já existem.";
+                }
+                else
+                {
+                    _usuarioService.Update(UsuarioMapper.UsuarioMap(usuarioViewModel));
+                    ViewData["Mensagem"] = "Sucesso: Usuário atualizado com sucesso.";
+                }
             }
             catch (Exception ex)
             {
@@ -100,11 +108,11 @@ namespace ISAT.Developer.Exam.Web.Controllers
 
         // POST: Usuarios/Delete/5
         [HttpPost]
-        public ActionResult Delete(long id, UsuarioViewModel usuarioViewModel)
+        public ActionResult Delete(UsuarioViewModel usuarioViewModel)
         {
             try
             {
-                _usuarioService.Delete(id);
+                _usuarioService.Delete(usuarioViewModel.Id);
                 ViewData["Mensagem"] = "Sucesso: Usuário excluído com sucesso.";
             }
             catch (Exception ex)

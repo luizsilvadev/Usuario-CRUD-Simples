@@ -7,5 +7,9 @@ namespace ISAT.Developer.Exam.Core.Interfaces
 {
     public interface IUsuarioService : IService<Usuario>
     {
+
+        bool ExistePorNomeCompleto(Usuario usuario);
+
+        bool ExistePorEmail(Usuario usuario);
     }
 }

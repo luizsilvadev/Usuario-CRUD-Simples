@@ -1,6 +1,8 @@
 ﻿using FluentValidation.Results;
 using ISAT.Developer.Exam.Core.Entities;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace ISAT.Developer.Exam.Core.Interfaces
 {
@@ -15,5 +17,7 @@ namespace ISAT.Developer.Exam.Core.Interfaces
         TEntity GetById(long id);
 
         IEnumerable<TEntity> GetAll();
+
+        bool ExistsByExpression(Expression<Func<TEntity, bool>> expression);
     }
 }

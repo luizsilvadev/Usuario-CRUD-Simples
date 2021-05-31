@@ -2,6 +2,8 @@
 using ISAT.Developer.Exam.Core.Entities;
 using ISAT.Developer.Exam.Core.Interfaces;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System;
 
 namespace ISAT.Developer.Exam.Core.Services
 {
@@ -61,6 +63,10 @@ namespace ISAT.Developer.Exam.Core.Services
             return _repository.GetAll();
         }
 
+        public virtual bool ExistsByExpression(Expression<Func<TEntity, bool>> expression)
+        {
+            return _repository.ExistsByExpression(expression);
+        }
         #endregion
     }
 }
